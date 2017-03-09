@@ -1,0 +1,82 @@
+TINOS README 
+============
+03/11/98
+
+This is TINOS source code snapshot. This file contains some instructions
+and status information. I recommend you read this file to get a general
+understanding what you can do with the current snapshot. Please note that
+this is unfinished, ongoing work that is not suitable for any serious usage.
+
+THE AUTHOR EXPLICITLY DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE
+INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT 
+SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, INDIRECT, OR CONSEQUENTIAL DAMAGES 
+OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER
+IN ACTION OF CONTRACT, NEGLIGENCE, OR OTHER TORTIOUS ACTION, ARISING OUT OF 
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+This is free software. You can freely use its source code or portions of it 
+(unless it is derived from another work in which case original license 
+conditions apply) in unchanged or modified form under the condition that you
+will maintain a copyright message in the header of the file. I also
+specifically require that you sent me an e-mail saying "hello" and sharing
+your thougths about the project.
+
+Getting started
+---------------
+
+To boot TINOS you need to have grub bootloader. You can download it from
+http://www.uruk.org/grub. You won't need to fiddle with your disk's boot
+sector, a bootable floppy with grub will do.
+
+Assuming you have grub, you need to either add the following lines to your
+grub config file, or type them after booting from grub floppy:
+
+root=(hd0,0)
+kernel=/home/beavis/tinos/kernel
+boot
+
+The first line tells grub what partition it should use to load kernel image,
+the second specifies a path to it, and the third one starts the kernel.
+Instead of "hd0,0" and "/home/beavis/tinos/kernel" you should provide
+appriopriate values according to your environment. TINOS kernel image
+can be found in /tinos/bin/kernel.
+
+You should be seing a TINOS kernel console prompt by now. If that's not
+the case, please e-mail me describing your problems.
+
+Playing
+-------
+
+You can verify now, whether TINOS will talk to your IDE disks. Type "ide".
+The list of IDE devices you have on your system should appear. Only disks
+are handled as of now (CD-ROMS, and others should appear on the list, 
+though). Disk driver is hardcoded to only do read requests, so you
+shouldn't worry about screwing your favorite data.
+
+Next, we can try to scan all your disks for partitions. Type "dev". That
+should establish simple block device layer by reading all partitions and
+dumping them on the screen.
+
+TINOS can handle ext2 filesystem in readonly mode. You can try it by typing
+"mount <device_number>", where device number is taken from the "dev" command
+above. If the filesystem has been mounted successfully, try "ls". Root
+directory should be dumped. You can also do "ls -l" to get more details.
+Changing dirs is done via "cd" command, but it's stupid now and takes
+an inode number as a parameter (inode number is always printed left to a
+file name).
+
+If you have more than one ext2 filesystem, you can try to mount the other
+one. The safest is to reboot and repeat the steps above. 
+
+If all of the above worked fine for you or it crashed at some point, please 
+drop me a message. It will give me an invaluable feedback to fix the bugs
+I wouldn't be able to find for myself.
+
+Thanks for trying TINOS!
+You can always check out the latest developments at TINOS website:
+http://www.geocities.com/SiliconValley/Haven/2934/tinos.html
+
+Bart Sekura
+
+bsekura@impaq.com.pl
+bsekura@geocities.com
